@@ -7,14 +7,16 @@ from models import db, Movie, Actor, Credit
 
 fake = Faker()
 
-def create_apartments():
-    apartments = []
+def create_movies():
+    movies = []
     for _ in range(25):
-        p = Apartment(
-            number=str(randint(1, 100)),
+        m = Movie(
+            rating=randint(1, 10),
+
+
         )
-        apartments.append(p)
-    return apartments
+        apartments.append(m)
+    return movies
 
 def create_tenant():
     tenants = []
@@ -40,24 +42,27 @@ def create_lease(apartments,tenants):
 if __name__ == '__main__':
 
     with app.app_context():
-        print("Clearing db...")
-        Tenant.query.delete()
-        Apartment.query.delete()
-        Lease.query.delete()
+        pass
 
-        print("Seeding Apartments...")
-        apartments = create_apartments()
-        db.session.add_all(apartments)
-        db.session.commit()
+        # print("Clearing db...")
+        # Tenant.query.delete()
+        # Apartment.query.delete()
+        # Lease.query.delete()
 
-        print("Seeding Tenants...")
-        tenants = create_tenant()
-        db.session.add_all(tenants)
-        db.session.commit()
+        # print("Seeding Apartments...")
+        # apartments = create_apartments()
+        # db.session.add_all(apartments)
+        # db.session.commit()
 
-        print("Seeding Leases...")
-        leases = create_lease(apartments, tenants)
-        db.session.add_all(leases)
-        db.session.commit()
+        # print("Seeding Tenants...")
+        # tenants = create_tenant()
+        # db.session.add_all(tenants)
+        # db.session.commit()
 
-        print("Done seeding!")
+        # print("Seeding Leases...")
+        # leases = create_lease(apartments, tenants)
+        # db.session.add_all(leases)
+        # db.session.commit()
+
+        # print("Done seeding!")
+

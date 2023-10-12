@@ -98,7 +98,23 @@ Add validations to the `Credit` model:
 Add validations to the `Movie` model:
 
 - must have a `rating` between 1 and 10.
-- `genre` must be one of the following: ["Action", "Comedy", "Drama", "Horror", "Romance", "RomCom"]
+- `genre` must be one of the following: [
+    "Action", 
+    "Comedy", 
+    "Drama", 
+    "Horror", 
+    "Romance", 
+    "Thriller", 
+    "Science Fiction", 
+    "Fantasy", 
+    "Mystery", 
+    "Adventure", 
+    "Crime", 
+    "Family", 
+    "Animation", 
+    "Documentary", 
+    "War"
+  ]
 
 ## Routes
 
