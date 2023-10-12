@@ -186,8 +186,8 @@ following properties in the body of the request:
 
 ```json
 {
-  "name": "Evan Horizon",
-  "field_of_study": "astronavigation"
+  "name": "Shawn Horizon",
+  "age": 52
 }
 ```
 
@@ -218,7 +218,7 @@ with one or more of the following properties in the body of the request:
 ```json
 {
   "name": "Bevan Horizon",
-  "field_of_study": "warp drive tech"
+  "age": 12
 }
 ```
 
@@ -298,9 +298,11 @@ This route should create a new `Movie`. It should accept an object with the foll
 
 ```json
 {
-  "name": "Project Terraform",
-  "scientist_id": 1,
-  "planet_id": 2
+  "image": "https://flxt.tmsimg.com/assets/p1036_p_v12_an.jpg",
+  "title": "Blazing Saddles",
+  "genre": "Action",
+  "rating": 7,
+  "description": "In this satirical take on Westerns, crafty railroad worker Bart (Cleavon Little) becomes the first black sheriff of Rock Ridge, a frontier town about to be destroyed in order to make way for a new railroad. Initially, the people of Rock Ridge harbor a racial bias toward their new leader. However, they warm to him after realizing that Bart and his perpetually drunk gunfighter friend (Gene Wilder) are the only defense against a wave of thugs sent to rid the town of its population."
 }
 ```
 
