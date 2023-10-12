@@ -45,7 +45,7 @@ and **Movies will be have many Actors**.
 
 You will implement an API for the following data model:
 
-![Sample Image](./Schema.png)
+![Schema](./Schema.png)
 
 
 The file `server/models.py` defines the model classes **without relationships**.
@@ -88,15 +88,17 @@ If you aren't able to get the provided seed file working, you are welcome to gen
 
 Add validations to the `Actor` model:
 
-- must have a `name`, and a `acting_type`
+- must have a `name`, and a `age` that is great than 10
 
 Add validations to the `Credit` model:
 
-- must have a `name`, a `scientist_id` and a `planet_id`
+- must have a `role`, a `actor_id` and a `movie_id`
+- `role` must be either: ["Performer", "Director", "Producor", "Playwright", "Lighting Design", "Sound Design", "Set Design"].
 
-Add validations to the `Credit` model:
+Add validations to the `Movie` model:
 
-- must have a `name`, a `scientist_id` and a `planet_id`
+- must have a `rating` between 1 and 10.
+- `genre` must be one of the following: ["Action", "Comedy", "Drama", "Horror", "Romance", "RomCom"]
 
 ## Routes
 
@@ -114,7 +116,7 @@ instantiate the `Api` class in server/app.py.
 
 Return JSON data in the format below. **Note**: you should return a JSON
 response in this format, without any additional nested data related to each
-scientist.
+actor.
 
 ```json
 [
@@ -133,8 +135,7 @@ scientist.
 
 ### GET /actors/<int:id>
 
-If the `Scientist` exists, return JSON data in the format below. Make sure to
-include a list of missions for the scientist.
+If the `Actor` exists, return JSON data in the format below. Make sure to include a list of missions for the actor.
 
 ```json
 "field_of_study": "Orbits",
@@ -249,7 +250,7 @@ JSON:
 }
 ```
 
-### DELETE /actirs/<int:id>
+### DELETE /actors/<int:id>
 
 If the `Actor` exists, it should be removed from the database, along with
 any `Credit`s that are associated with it. If you did not set up your models to
@@ -291,10 +292,9 @@ movie.
 ]
 ```
 
-### POST /missions
+### POST /movies
 
-This route should create a new `Missions`. It should accept an object with the
-following properties in the body of the request:
+This route should create a new `Movie`. It should accept an object with the following properties in the body of the request:
 
 ```json
 {
@@ -304,8 +304,7 @@ following properties in the body of the request:
 }
 ```
 
-If the `Mission` is created successfully, send back a response about the new
-mission:
+If the `Movie` is created successfully, send back a response about the new movie:
 
 ```json
 {
@@ -327,8 +326,7 @@ mission:
 }
 ```
 
-If the `Mission` is **not** created successfully, return the following JSON
-data, along with the appropriate HTTP status code:
+If the `Movie` is **not** created successfully, return the following JSON data, along with the appropriate HTTP status code:
 
 ```json
 {
@@ -337,16 +335,3 @@ data, along with the appropriate HTTP status code:
 ```
 
 ---
-
-### (Optional FYI) React `useCallback` hook
-
-The `ScientistDetail` component in the React app uses the `useCallback` hook to
-memoize the function that fetches a scientist by id. The scientist detail is
-fetched when the component initially renders, and is fetched again after
-updating the scientist detail. `useCallback` caches the function to avoid
-recreating it .
-
-### Resources
-
-- [useCallback API](https://react.dev/reference/react/useCallback)
-- [Should you add useCallback everywhere?](https://react.dev/reference/react/useCallback#should-you-add-usecallback-everywhere)
