@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from models import db
+from models import db, Movie
 from flask_restful import Api, Resource
 from flask_migrate import Migrate
 from flask import Flask, make_response, jsonify, request

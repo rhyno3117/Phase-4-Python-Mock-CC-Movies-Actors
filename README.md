@@ -1,31 +1,18 @@
-# Flask Mock Challenge - Cosmic Travel
+# Flask Mock Challenge - Movies and Actors
 
-It is the year 2100 and you run an interplanetary space travel agency. You are
-building a website to book scientists on missions to other planets.
+It is the year 2030 and IMDB crashed, it is up to you to create a database for people to see which actor was in which movie. You are
+movie lovers only hope, may the force be with you.
 
 In this repo:
 
 - There is a Flask application with some features built out.
-- There is a fully built React frontend application.
-- There are tests included which you can run using `pytest -x`.
-- There is a file `mock-challenge-cosmic-challenge.postman_collection.json` that
+<!-- - There is a file `mock-challenge-cosmic-challenge.postman_collection.json` that
   contains a Postman collection of requests for testing each route you will
-  implement.
+  implement. -->
 
-Depending on your preference, you can either check your API by:
+You can check your API by:
 
-- Using Postman to make requests
-- Running `pytest -x` and seeing if your code passes the tests
-- Running the React application in the browser and interacting with the API via
-  the frontend
-
-You can import `mock-challenge-cosmic-challenge.postman_collection.json` into
-Postman by pressing the `Import` button.
-
-![import postman](https://curriculum-content.s3.amazonaws.com/6130/phase4-mock-challenge/domain.png)
-
-Select `Upload Files`, navigate to this repo folder, and select
-`mock-challenge-cosmic-challenge.postman_collection.json` as the file to import.
+- Using Postman, Thunder Client or a different request engine to make requests
 
 ---
 
@@ -34,9 +21,7 @@ Select `Upload Files`, navigate to this repo folder, and select
 To download the dependencies for the frontend and backend, run:
 
 ```console
-pipenv install
-pipenv shell
-npm install --prefix client
+pipenv install && pipenv shell
 ```
 
 You can run your Flask API on [`localhost:5555`](http://localhost:5555) by
@@ -45,17 +30,6 @@ running:
 ```console
 python server/app.py
 ```
-
-You can run your React app on [`localhost:4000`](http://localhost:4000) by
-running:
-
-```sh
-npm start --prefix client
-```
-
-You are not being assessed on React, and you don't have to update any of the
-React code; the frontend code is available just so that you can test out the
-behavior of your API in a realistic setting.
 
 Your job is to build out the Flask API to add the functionality described in the
 deliverables below.
@@ -70,8 +44,6 @@ visit one planet**. Over their careers, **scientists will visit many planets**
 and **planets will be visited by many scientists**.
 
 You will implement an API for the following data model:
-
-![cosmic_model](https://curriculum-content.s3.amazonaws.com/6130/phase4-mock-challenge/domain.png)
 
 The file `server/models.py` defines the model classes **without relationships**.
 Use the following commands to create the initial database `app.db`:
