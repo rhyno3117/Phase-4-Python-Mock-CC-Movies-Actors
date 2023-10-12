@@ -38,30 +38,34 @@ deliverables below.
 
 ## Models
 
-It is your job to build out Planet, Scientist, and Mission models so that
-scientists can book their missions. **In a given mission, one scientist will
-visit one planet**. Over their careers, **scientists will visit many planets**
-and **planets will be visited by many scientists**.
+It is your job to build out Movie, Actor, and Credit models so that
+Actors can be in Movies. **In a given credit, one Actor will be in
+ one Movie**. Over their careers, **Actors will be in many Movies**
+and **Movies will be have many Actors**.
 
 You will implement an API for the following data model:
+
+![Sample Image](./Schema.png)
+
 
 The file `server/models.py` defines the model classes **without relationships**.
 Use the following commands to create the initial database `app.db`:
 
 ```console
-export FLASK_APP=server/app.py
+cd server/
+export FLASK_APP=app.py
 flask db init
 flask db upgrade head
 ```
 
 Now you can implement the relationships as shown in the ER Diagram:
 
-- A `Scientist` has (visits) many `Planets` through `Mission`s
-- An `Planet` has (is visited by) many `Scientist`s through `Mission`s
-- A `Mission` belongs to a `Scientist` and belongs to a `Planet`
+- A `Actor` has many `Movie` through `Credit`s
+- An `Movie` has many `Actor`s through `Credit`s
+- A `Credit` belongs to a `Movie` and belongs to a `Actor`
 
 Update `server/models.py` to establish the model relationships. Since a
-`Mission` belongs to a `Scientist` and a `Planet`, configure the model to
+`Credit` belongs to a `Actor` and a `Movie`, configure the model to
 cascade deletes.
 
 Set serialization rules to limit the recursion depth.
@@ -71,11 +75,10 @@ Run the migrations and seed the database:
 ```console
 flask db revision --autogenerate -m 'message'
 flask db upgrade head
-python server/seed.py
+python seed.py
 ```
 
-> If you aren't able to get the provided seed file working, you are welcome to
-> generate your own seed data to test the application.
+If you aren't able to get the provided seed file working, you are welcome to generate your own seed data to test the application.
 
 ---
 
@@ -83,11 +86,15 @@ python server/seed.py
 
 ## Validations
 
-Add validations to the `Scientist` model:
+Add validations to the `Actor` model:
 
-- must have a `name`, and a `field_of_study`
+- must have a `name`, and a `acting_type`
 
-Add validations to the `Mission` model:
+Add validations to the `Credit` model:
+
+- must have a `name`, a `scientist_id` and a `planet_id`
+
+Add validations to the `Credit` model:
 
 - must have a `name`, a `scientist_id` and a `planet_id`
 
@@ -103,7 +110,7 @@ single field).
 NOTE: If you choose to implement a Flask-RESTful app, you need to add code to
 instantiate the `Api` class in server/app.py.
 
-### GET /scientists
+### GET /actors
 
 Return JSON data in the format below. **Note**: you should return a JSON
 response in this format, without any additional nested data related to each
@@ -124,7 +131,7 @@ scientist.
 ]
 ```
 
-### GET /scientists/<int:id>
+### GET /actors/<int:id>
 
 If the `Scientist` exists, return JSON data in the format below. Make sure to
 include a list of missions for the scientist.
@@ -162,18 +169,18 @@ include a list of missions for the scientist.
 }
 ```
 
-If the `Scientist` does not exist, return the following JSON data, along with
+If the `Actor` does not exist, return the following JSON data, along with
 the appropriate HTTP status code:
 
 ```json
 {
-  "error": "Scientist not found"
+  "error": "Actor not found"
 }
 ```
 
-### POST /scientists
+### POST /actors
 
-This route should create a new `Scientist`. It should accept an object with the
+This route should create a new `Actor`. It should accept an object with the
 following properties in the body of the request:
 
 ```json
@@ -183,8 +190,7 @@ following properties in the body of the request:
 }
 ```
 
-If the `Scientist` is created successfully, send back a response with the new
-`Scientist`:
+If the `Actor` is created successfully, send back a response with the new `Actor`:
 
 ```json
 {
@@ -194,7 +200,7 @@ If the `Scientist` is created successfully, send back a response with the new
 }
 ```
 
-If the `Scientist` is **not** created successfully due to validation errors,
+If the `Actor` is **not** created successfully due to validation errors,
 return the following JSON data, along with the appropriate HTTP status code:
 
 ```json
@@ -203,9 +209,9 @@ return the following JSON data, along with the appropriate HTTP status code:
 }
 ```
 
-### PATCH /scientists/:id
+### PATCH /actors/:id
 
-This route should update an existing `Scientist`. It should accept an object
+This route should update an existing `Actor`. It should accept an object
 with one or more of the following properties in the body of the request:
 
 ```json
@@ -215,8 +221,7 @@ with one or more of the following properties in the body of the request:
 }
 ```
 
-If the `Scientist` is updated successfully, send back a response with the
-updated `Scientist` and a 202 `accepted` status code:
+If the `Actor` is updated successfully, send back a response with the updated `Actor` and a 202 `accepted` status code:
 
 ```json
 {
@@ -226,7 +231,7 @@ updated `Scientist` and a 202 `accepted` status code:
 }
 ```
 
-If the `Scientist` is **not** updated successfully, return the following JSON
+If the `Actor` is **not** updated successfully, return the following JSON
 data, along with the appropriate HTTP status code:
 
 ```json
@@ -240,34 +245,34 @@ JSON:
 
 ```json
 {
-  "error": "Scientist not found"
+  "error": "Actor not found"
 }
 ```
 
-### DELETE /scientists/<int:id>
+### DELETE /actirs/<int:id>
 
-If the `Scientist` exists, it should be removed from the database, along with
-any `Mission`s that are associated with it. If you did not set up your models to
-cascade deletes, you need to delete associated `Mission`s before the `Scientist`
+If the `Actor` exists, it should be removed from the database, along with
+any `Credit`s that are associated with it. If you did not set up your models to
+cascade deletes, you need to delete associated `Credit`s before the `Actor`
 can be deleted.
 
-After deleting the `Scientist`, return an _empty_ response body, along with the
+After deleting the `Actor`, return an _empty_ response body, along with the
 appropriate HTTP status code.
 
-If the `Scientist` does not exist, return the following JSON data, along with
+If the `Actor` does not exist, return the following JSON data, along with
 the appropriate HTTP status code:
 
 ```json
 {
-  "error": "Scientist not found"
+  "error": "Actor not found"
 }
 ```
 
-### GET /planets
+### GET /movies
 
 Return JSON data in the format below. **Note**: you should return a JSON
 response in this format, without any additional nested data related to each
-planet.
+movie.
 
 ```json
 [
