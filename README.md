@@ -118,7 +118,7 @@ Return JSON data in the format below. **Note**: you should return a JSON
 response in this format, without any additional nested data related to each
 actor.
 
-```json
+<!-- ```json
 [
   {
     "id": 1,
@@ -131,12 +131,12 @@ actor.
     "field_of_study": "orbital mechanics"
   }
 ]
-```
+``` -->
 
 ### GET /actors/<int:id>
 
-If the `Actor` exists, return JSON data in the format below. Make sure to include a list of missions for the actor.
-
+If the `Actor` exists, return JSON data in the format below. Make sure to include a list of Movies for the actor.
+<!-- 
 ```json
 "field_of_study": "Orbits",
     "id": 1,
@@ -168,7 +168,7 @@ If the `Actor` exists, return JSON data in the format below. Make sure to includ
         }
     ]
 }
-```
+``` -->
 
 If the `Actor` does not exist, return the following JSON data, along with
 the appropriate HTTP status code:
@@ -191,15 +191,15 @@ following properties in the body of the request:
 }
 ```
 
-If the `Actor` is created successfully, send back a response with the new `Actor`:
+If the `Actor` is created successfully, send back a response with the new `Actor`.
 
-```json
+<!-- ```json
 {
   "id": 3,
   "name": "Evan Horizon",
   "field_of_study": "astronavigation"
 }
-```
+``` -->
 
 If the `Actor` is **not** created successfully due to validation errors,
 return the following JSON data, along with the appropriate HTTP status code:
@@ -222,15 +222,15 @@ with one or more of the following properties in the body of the request:
 }
 ```
 
-If the `Actor` is updated successfully, send back a response with the updated `Actor` and a 202 `accepted` status code:
-
+If the `Actor` is updated successfully, send back a response with the updated `Actor` and a 202 `accepted` status code.
+<!-- 
 ```json
 {
   "id": 2,
   "name": "Bevan Horizon",
   "field_of_study": "warp drive tech"
 }
-```
+``` -->
 
 If the `Actor` is **not** updated successfully, return the following JSON
 data, along with the appropriate HTTP status code:
@@ -275,7 +275,7 @@ Return JSON data in the format below. **Note**: you should return a JSON
 response in this format, without any additional nested data related to each
 movie.
 
-```json
+<!-- ```json
 [
   {
     "id": 1,
@@ -290,7 +290,7 @@ movie.
     "nearest_star": "Canus Minor"
   }
 ]
-```
+``` -->
 
 ### POST /movies
 
@@ -304,9 +304,9 @@ This route should create a new `Movie`. It should accept an object with the foll
 }
 ```
 
-If the `Movie` is created successfully, send back a response about the new movie:
+If the `Movie` is created successfully, send back a response about the new movie.
 
-```json
+<!-- ```json
 {
   "id": 21,
   "name": "Project Terraform",
@@ -324,7 +324,7 @@ If the `Movie` is created successfully, send back a response about the new movie
   },
   "scientist_id": 1
 }
-```
+``` -->
 
 If the `Movie` is **not** created successfully, return the following JSON data, along with the appropriate HTTP status code:
 
