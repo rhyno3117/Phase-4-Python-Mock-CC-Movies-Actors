@@ -88,7 +88,7 @@ If you aren't able to get the provided seed file working, you are welcome to gen
 
 Add validations to the `Actor` model:
 
-- must have a `name`, and a `age` that is great than 10
+- must have a `name`, and an `age` that is great than 10
 
 Add validations to the `Credit` model:
 

@@ -1,68 +1,94 @@
 from random import randint, choice as rc
 
 from faker import Faker
+from faker.providers import lorem
 
 from app import app
 from models import db, Movie, Actor, Credit
 
+
 fake = Faker()
+fake.add_provider(lorem)
+
+
+genres= [
+    "Action", 
+    "Comedy", 
+    "Drama", 
+    "Horror", 
+    "Romance", 
+    "Thriller", 
+    "Science Fiction", 
+    "Fantasy", 
+    "Mystery", 
+    "Adventure", 
+    "Crime", 
+    "Family", 
+    "Animation", 
+    "Documentary", 
+    "War"
+]
+
+roles=["Performer", "Director", "Producor", "Playwright", "Lighting Design", "Sound Design", "Set Design"]
 
 def create_movies():
     movies = []
     for _ in range(25):
         m = Movie(
             rating=randint(1, 10),
-
-
+            image="placeholder",
+            genre=rc(genres),
+            description=fake.paragraph(nb_sentences=5),
+            title=fake.name()
         )
-        apartments.append(m)
+        movies.append(m)
     return movies
 
-def create_tenant():
-    tenants = []
+def create_actor():
+    actors = []
     for _ in range(25):
-        s = Tenant(
+        s = Actor(
             name=fake.name(),
-            age=randint(18, 50),
+            age=randint(11, 80),
         )
-        tenants.append(s)
-    return tenants
+        actors.append(s)
+    return actors
 
-def create_lease(apartments,tenants):
-    leases = []
+def create_credits(actors,movies):
+    credits = []
     for _ in range(20):
-        m = Lease(
+        c = Credit(
             rent=randint(2000, 5000),
-            tenant_id=rc(tenants).id,
-            apartment_id=rc(apartments).id
+            movie_id=rc(movies).id,
+            actor_id=rc(actors).id
         )
-        leases.append(m)
-    return leases
+        credits.append(c)
+    return credits
 
 if __name__ == '__main__':
 
     with app.app_context():
         pass
 
-        # print("Clearing db...")
-        # Tenant.query.delete()
-        # Apartment.query.delete()
-        # Lease.query.delete()
+        print("Clearing db...")
+        Credit.query.delete()
+        Movie.query.delete()
+        Actor.query.delete()
 
-        # print("Seeding Apartments...")
-        # apartments = create_apartments()
-        # db.session.add_all(apartments)
-        # db.session.commit()
+        print("Seeding Actors...")
+        actors = create_actor()
+        db.session.add_all(actors)
+        db.session.commit()
 
-        # print("Seeding Tenants...")
-        # tenants = create_tenant()
-        # db.session.add_all(tenants)
-        # db.session.commit()
+        print("Seeding Movies...")
+        movies = create_movies()
+        db.session.add_all(movies)
+        db.session.commit()
 
-        # print("Seeding Leases...")
-        # leases = create_lease(apartments, tenants)
-        # db.session.add_all(leases)
-        # db.session.commit()
+        print("Seeding Credits...")
+        credits_list = create_credits(actors, movies)
+        db.session.add_all(credits_list)
+        db.session.commit()
 
-        # print("Done seeding!")
+        print("Done seeding!")
 
