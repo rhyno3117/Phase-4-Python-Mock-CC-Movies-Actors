@@ -11,25 +11,12 @@ fake = Faker()
 fake.add_provider(lorem)
 
 
-genres= [
-    "Action", 
-    "Comedy", 
-    "Drama", 
-    "Horror", 
-    "Romance", 
-    "Thriller", 
-    "Science Fiction", 
-    "Fantasy", 
-    "Mystery", 
-    "Adventure", 
-    "Crime", 
-    "Family", 
-    "Animation", 
-    "Documentary", 
-    "War"
-]
+genres = ["Action", "Comedy", "Drama", "Horror", "Romance", "Thriller", "Science Fiction",
+          "Fantasy", "Mystery", "Adventure", "Crime", "Family", "Animation", "Documentary", "War"]
 
-roles=["Performer", "Director", "Producor", "Playwright", "Lighting Design", "Sound Design", "Set Design"]
+roles = ["Performer", "Director", "Producor", "Playwright",
+         "Lighting Design", "Sound Design", "Set Design"]
+
 
 def create_movies():
     movies = []
@@ -44,6 +31,7 @@ def create_movies():
         movies.append(m)
     return movies
 
+
 def create_actor():
     actors = []
     for _ in range(25):
@@ -54,7 +42,8 @@ def create_actor():
         actors.append(s)
     return actors
 
-def create_credits(actors,movies):
+
+def create_credits(actors, movies):
     credits = []
     for _ in range(20):
         c = Credit(
@@ -65,10 +54,10 @@ def create_credits(actors,movies):
         credits.append(c)
     return credits
 
+
 if __name__ == '__main__':
 
     with app.app_context():
-        pass
 
         print("Clearing db...")
         Credit.query.delete()
@@ -91,4 +80,3 @@ if __name__ == '__main__':
         db.session.commit()
 
         print("Done seeding!")
-
